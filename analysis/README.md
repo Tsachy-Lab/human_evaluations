@@ -1,1 +1,0 @@
-This directory will contain analysis notebooks and scripts for this project.

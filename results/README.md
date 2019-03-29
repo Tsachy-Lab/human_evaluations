@@ -1,1 +1,0 @@
-This directory will contain intermediate results (e.g., CSV files, key plots) from this project.
