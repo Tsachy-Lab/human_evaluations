@@ -11,25 +11,27 @@ function sendData() {
 }
 
 var consentHTML = {
-    'str1' : '<p>In this HIT, you will view some drawings produced by children who were trying to trace a shape as accurately as they could. Your task is to rate each tracing on a 5-point scale. </p>',
-    'str2' : '<p>We expect this hit to take approximately 8-10 minutes to complete, including the time it takes to read instructions.</p>',
-    'str3' : "<p>If you encounter a problem or error, send us an email (sketchloop@gmail.com) and we will make sure you're compensated for your time! Please pay attention and do your best! Thank you!</p><p> Note: We recommend using Chrome. We have not tested this HIT in other browsers.</p>",
-    'str4' : ["<u><p id='legal'>Consenting to Participate:</p></u>",
-        "<p id='legal'>By completing this HIT, you are participating in a study being performed by cognitive scientists in the Stanford Department of Psychology. If you have questions about this research, please contact the <b>Sketchloop Admin</b> at <b><a href='mailto://sketchloop@gmail.com'>sketchloop@gmail.com</a> </b>. You must be at least 18 years old to participate. Your participation in this research is voluntary. You may decline to answer any or all of the following questions. You may decline further participation, at any time, without adverse consequences. Your anonymity is assured; the researchers who have requested your participation will not receive any personal information about you.</p>"].join(' ')
+    'str1' : ['<p>In this HIT, you will view reconstructions of images. Your task is to rate each reconstruction on a 5-point scale. </p>',
+  	      '<p>We expect this hit to take approximately 15 minutes to complete, including the time it takes to read instructions.</p>',
+              "<p>Please pay attention and do your best! Thank you!</p><p> Note: We recommend using Chrome. We have not tested this HIT in other browsers.</p>"].join(' '),
+    'str2' : ["<u><p id='legal'>Consenting to Participate:</p></u>",
+        "<p id='legal'>By completing this HIT, you are participating in a study being performed by electrical engineers and cognitive scientists in the Stanford Departments of Electrical Engineering and of Psychology. Your participation in this research is voluntary. You may decline to answer any or all of the following questions. You may decline further participation, at any time, without adverse consequences. Your anonymity is assured; the researchers who have requested your participation will not receive any personal information about you.</p>"].join(' ')
 };
 
 var instructionsHTML = {
-    'str1' : "<p> Here’s how the game will work: </p> <p> On each trial, you will see a tracing on top of a reference shape. The tracing is marked in red and the reference shape is in grey. Your goal is to rate how accurately the tracing matches the SHAPE and is aligned to the POSITION of the reference. The rating scale ranges from 1 (POOR) to 5 (EXCELLENT).</p>",
-    'str2': ["<p>Here’s how the game will work: </p> <p> On each trial, you will see a tracing on top of a reference shape. The tracing is marked in red and the reference shape is in grey. Your goal is to rate how accurately the tracing matches the SHAPE and is aligned to the POSITION of the reference. The rating scale ranges from 1 (POOR) to 5 (EXCELLENT). </p> <p> Here are some example tracings that should be given a score of 5 (EXCELLENT) and some tracings that should be given a score of 1 (POOR).</p>",
-        '<p>Example tracing with score 5: </p>',
-              '<div class="eg_div"><img class="eg_img" src="img/t5_square.png"><img class="eg_img" src="img/t5_shape.png"><img class="eg_img" src="img/t5_circle.png"></div>',
-              '<p>Example tracing with score 1: </p>',
-	      '<div class="eg_div"><img class="eg_img" src="img/t1_square.png"><img class="eg_img" src="img/t1_shape.png"><img class="eg_img" src="img/t1_circle.png"></div>'].join(' '),
-    'str3': ['<p> If you notice any of the following, this should reduce the score you assign to that tracing:</p>',
-        '<ul><li>Adding extra objects to the tracing (e.g. scribbles, heart, flower, smiling faces, text)<img class="notice_img" src="img/extra.png"></li>',
-        '<li>Painting or "filling in" the reference shape, rather than tracing its outline<img class="notice_img" src="img/paint.png"></li></ul>',].join(' '),
-    'str4':'<p> A different sketch will appear on each trial. After a brief two-second delay, the buttons will become active (dark gray) so you can submit your rating. Please take your time to provide as accurate of a rating as you can.</p> </p> <img class="rating_img" src="img/rating.png">',
-    'str5': "<p> When you finish, please click the submit button to finish the game. If a popup appears asking you if you are sure you want to leave the page, you must click YES to confirm that you want to leave the page. This will cause the HIT to submit. Let's begin!"
+    'str1' : "<p> Here’s how the game will work: </p> <p> On each trial, you will see a pair of images. The image on the left is an original image. The image on the right is a reconstruction of the image on the left. The reconstruction was produced using some lossy compression technique. Your goal is to rate how well the reconstruction preserves the content of the original image, and the arrangement of that content. The rating scale ranges from 1 (POOR) to 5 (EXCELLENT).</p>",
+    'str2': ["<p> Here’s how the game will work: </p> <p> On each trial, you will see a pair of images. The image on the left is an original image. The image on the right is a reconstruction of the image on the left. The reconstruction was produced using some lossy compression technique. Your goal is to rate how well the reconstruction preserves the content of the original image, and the arrangement of that content. The rating scale ranges from 1 (POOR) to 5 (EXCELLENT).</p> <p> Here are three sample images: </p>",
+	     '<div class="eg_div"><img class="eg_img" src="img/boats.png"><img class="eg_img" src="img/chairs.png"><img class="eg_img" src="img/shannon.jpg"></div>',
+	     "<p> Here are some reconstructions of those images that should be given a score of 5 (EXCELLENT) and some reconstructions that should be given a score of 1 (POOR).</p>",
+	     '<p>Example reconstructions with score 5: </p>',
+             '<div class="eg_div"><img class="eg_img" src="img/boats_spade.png"><img class="eg_img" src="img/chairs_bpg40.png"><img class="eg_img" src="img/shannon_bpg40.png"></div>',
+              '<p>Example reconstructions with score 1: </p>',
+	      '<div class="eg_div"><img class="eg_img" src="img/boats_150pxw_bpg51.png"><img class="eg_img" src="img/bears.jpg"><img class="eg_img" src="img/shannon_100pxw_bpg51.png"></div>'].join(' '),
+    'str3': ['<p> If you notice any of the following, this should reduce the score you assign to that reconstruction:</p>',
+        '<ul><li>Adding extra objects to or omitting objects from the reconstruction </li>',
+        '<li>Transformations to objects that make them unrecognizable</li></ul>',].join(' '),
+    'str4':['<p>Please take your time to provide as accurate of a rating as you can.</p>',
+            "<p> When you finish, please click the submit button to finish the game. If a popup appears asking you if you are sure you want to leave the page, you must click YES to confirm that you want to leave the page. This will cause the HIT to submit. Let's begin!"].join(' ')
 };
 
 
@@ -38,14 +40,11 @@ var welcomeTrial = {
     type: 'instructions',
     pages: [
         consentHTML.str1,
-//        consentHTML.str2,
-//        consentHTML.str3,
-//        consentHTML.str4,
+        consentHTML.str2,
         instructionsHTML.str1,
         instructionsHTML.str2,
         instructionsHTML.str3,
         instructionsHTML.str4,
-        instructionsHTML.str5
     ],
     show_clickable_nav: true,
     allow_keys:  false
@@ -79,7 +78,7 @@ function Trial () {
     this.type = 'image-button-response';
     this.iterationName = 'testing';
     this.dev_mode = false;
-    this.prompt = "Please rate how well this tracing matches the reference shape.";
+    this.prompt = "Please rate your satisfaction with the image on the right, which is a reconstruction of the image on the left.";
     this.image_url = "img/catch.png";
     this.category ='catch';
     this.choices = ['1','2','3','4','5'];
