@@ -157,8 +157,8 @@ catch (err) {
 function sendSingleStim(socket, data) {
     sendPostRequest('http://localhost:6003/db/getsinglestim', {
         json: {
-            dbname: 'testDatabase',
-            colname: 'testCollection',
+            dbname: 'highschoolers',
+            colname: 'highschoolers',
             numTrials: 1,
             gameid: data.gameID
         }

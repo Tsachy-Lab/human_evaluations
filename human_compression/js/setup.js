@@ -15,22 +15,24 @@ var consentHTML = {
   	      '<p>We expect this hit to take approximately 15 minutes to complete, including the time it takes to read instructions.</p>',
               "<p>Please pay attention and do your best! Thank you!</p><p> Note: We recommend using Chrome. We have not tested this HIT in other browsers.</p>"].join(' '),
     'str2' : ["<u><p id='legal'>Consenting to Participate:</p></u>",
-        "<p id='legal'>By completing this HIT, you are participating in a study being performed by electrical engineers and cognitive scientists in the Stanford Departments of Electrical Engineering and of Psychology. Your participation in this research is voluntary. You may decline to answer any or all of the following questions. You may decline further participation, at any time, without adverse consequences. Your anonymity is assured; the researchers who have requested your participation will not receive any personal information about you.</p>"].join(' ')
+        "<p id='legal'>By completing this hit, you are participating in a study being performed by electrical engineers and cognitive scientists in the Stanford Departments of Electrical Engineering and of Psychology. Your participation in this research is voluntary. You may decline to answer any or all of the following questions. You may decline further participation, at any time, without adverse consequences. Your anonymity is assured; the researchers who have requested your participation will not receive any personal information about you.</p>"].join(' ')
 };
 
 var instructionsHTML = {
-    'str1' : "<p> Here’s how the game will work: </p> <p> On each trial, you will see a pair of images. The image on the left is an original image. The image on the right is a reconstruction of the image on the left. The reconstruction was produced using some lossy compression technique. Your goal is to rate how well the reconstruction preserves the content of the original image, and the arrangement of that content. The rating scale ranges from 1 (POOR) to 5 (EXCELLENT).</p>",
-    'str2': ["<p> Here’s how the game will work: </p> <p> On each trial, you will see a pair of images. The image on the left is an original image. The image on the right is a reconstruction of the image on the left. The reconstruction was produced using some lossy compression technique. Your goal is to rate how well the reconstruction preserves the content of the original image, and the arrangement of that content. The rating scale ranges from 1 (POOR) to 5 (EXCELLENT).</p> <p> Here are three sample images: </p>",
+    'str1' : ["<p> Here’s how the hit will work: </p> <p> On each trial, you will see a pair of images. The image on the left is an original image. The image on the right is a reconstruction of the image on the left. The reconstruction was produced using some lossy compression technique.</p>",
+             "<p> Your goal is to rate how well the reconstruction preserves the important content of the original image, and the arrangement of that content. The rating scale ranges from 1 (POOR) to 5 (EXCELLENT).</p>"].join(' '),
+    'str2': ["<p> Here’s how the hit will work: </p> <p> On each trial, you will see a pair of images. The image on the left is an original image. The image on the right is a reconstruction of the image on the left. The reconstruction was produced using some lossy compression technique.</p>",
+	    "<p> Your goal is to rate how well the reconstruction preserves the important content of the original image, and the arrangement of that content. The rating scale ranges from 1 (POOR) to 5 (EXCELLENT).</p> <p> Here are three sample images: </p>",
 	     '<div class="eg_div"><img class="eg_img" src="img/boats.png"><img class="eg_img" src="img/chairs.png"><img class="eg_img" src="img/shannon.jpg"></div>',
 	     "<p> Here are some reconstructions of those images that should be given a score of 5 (EXCELLENT) and some reconstructions that should be given a score of 1 (POOR).</p>",
-	     '<p>Example reconstructions with score 5: </p>',
+	     '<p> Example reconstructions with score 5. Note that "reconstructions" are not perfect, but are still excellent representations of the original image: </p>',
              '<div class="eg_div"><img class="eg_img" src="img/boats_spade.png"><img class="eg_img" src="img/chairs_bpg40.png"><img class="eg_img" src="img/shannon_bpg40.png"></div>',
-              '<p>Example reconstructions with score 1: </p>',
+              '<p> Example reconstructions with score 1: </p>',
 	      '<div class="eg_div"><img class="eg_img" src="img/boats_150pxw_bpg51.png"><img class="eg_img" src="img/bears.jpg"><img class="eg_img" src="img/shannon_100pxw_bpg51.png"></div>'].join(' '),
     'str3': ['<p> If you notice any of the following, this should reduce the score you assign to that reconstruction:</p>',
         '<ul><li>Adding extra objects to or omitting objects from the reconstruction </li>',
-        '<li>Transformations to objects that make them unrecognizable</li></ul>',].join(' '),
-    'str4':['<p>Please take your time to provide as accurate of a rating as you can.</p>',
+        '<li>Transformations to objects that make them unrecognizable</li></ul>'].join(' '),
+    'str4':['<p> Please take your time to provide as accurate of a rating as you can.</p>',
             "<p> When you finish, please click the submit button to finish the game. If a popup appears asking you if you are sure you want to leave the page, you must click YES to confirm that you want to leave the page. This will cause the HIT to submit. Let's begin!"].join(' ')
 };
 
