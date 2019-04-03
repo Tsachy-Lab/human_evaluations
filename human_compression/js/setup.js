@@ -1,6 +1,6 @@
 var oldCallback;
 var score = 0;
-var num_trials = 105
+var num_trials = 78
 var catch_freq = Math.round(num_trials/5);
 console.log(catch_freq);
 
@@ -49,7 +49,7 @@ var welcomeTrial = {
         instructionsHTML.str4,
     ],
     show_clickable_nav: true,
-    allow_keys:  false
+    allow_keys:  true
 };
 
 var acceptHTML = {
@@ -116,17 +116,13 @@ function setupGame () {
 
             if(trial.trialNum % catch_freq != 0) {
                 var newCallback = function (d) {
-                    trial.image1_url = d.img_url;
-		    trial.image2_url = d.orig_url;
-                    trial.category = d.category;
-                    trial.age = d.age;
-                    trial.session_id = d.session_id;
+		    console.log('orig_url',d.orig_url);
+                    trial.image1_url = d.orig_url;
+		    trial.image2_url = d.compressed_url;
                     trial.choices = _.range(1, d.number_rating_levels + 1);
-                    trial.upper_bound = d.upper_bound;
-                    trial.lower_bound = d.lower_bound;
-                };
+                                    };
                 // call server for stims
-                socket.emit('getStim', {gameID: id});
+                socket.emit('getStim');
                 socket.on('stimulus', newCallback);
 
             }

@@ -86,7 +86,7 @@ io.on('connection', function (socket) {
     // Send client stims
     // initializeWithTrials(socket, UUID());
     socket.on('getStim', function(data) {
-        sendSingleStim(socket, data);
+        sendSingleStim(socket);
     });
 
     // Set up callback for writing client data to mongo
@@ -154,17 +154,18 @@ catch (err) {
 };
 
 
-function sendSingleStim(socket, data) {
+function sendSingleStim(socket) {
     sendPostRequest('http://localhost:6003/db/getsinglestim', {
         json: {
             dbname: 'stimuli',
             colname: 'bpg_hc_eval',
-            numTrials: 1,
-            gameid: data.gameID
+            numTrials: 1
+           
         }
     }, (error, res, body) => {
         if (!error && res.statusCode === 200) {
-        socket.emit('stimulus', body);
+	    console.log('stimulus',body);
+            socket.emit('stimulus', body);
     } else {
         console.log(`error getting stims: ${error} ${body}`);
         console.log(`falling back to local stimList`);
