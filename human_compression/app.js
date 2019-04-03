@@ -128,7 +128,7 @@ var handleInvalidID = function(req, res) {
 function checkPreviousParticipant (workerId, callback) {
     var p = {'workerId': workerId};
     var postData = {
-        dbname: 'kiddraw',
+        dbname: 'human_compression',
         query: p,
         projection: {'_id': 1}
     };
@@ -157,8 +157,8 @@ catch (err) {
 function sendSingleStim(socket, data) {
     sendPostRequest('http://localhost:6003/db/getsinglestim', {
         json: {
-            dbname: 'highschoolers',
-            colname: 'highschoolers',
+            dbname: 'stimuli',
+            colname: 'bpg_hc_eval',
             numTrials: 1,
             gameid: data.gameID
         }

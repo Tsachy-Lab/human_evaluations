@@ -85,7 +85,7 @@ function serve() {
       const projection = request.body.projection;
 
       // hardcoded for now (TODO: get list of collections in db)
-      var collectionList = ['tracing_eval']; 
+      var collectionList = ['bpg_hc_eval']; 
 
       function checkCollectionForHits(collectionName, query, projection, callback) {
         const collection = database.collection(collectionName);        
@@ -184,7 +184,7 @@ function serve() {
           console.log(err);
         } else {
 	    // Immediately mark as annotated so others won't get it too
-	    markAnnotation(collection, request.body.gameid, results[0]['_id']);
+//	    markAnnotation(collection, request.body.gameid, results[0]['_id']);
           response.send(results[0]);
         }
       });
