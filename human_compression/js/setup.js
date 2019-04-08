@@ -3,6 +3,20 @@ var score = 0;
 var num_trials = 78
 var catch_freq = Math.round(num_trials/5);
 console.log(catch_freq);
+var json = (function() {
+        var json = null;
+        $.ajax({
+            'async': false,
+            'global': false,
+            'url': "./bpg_hc_stimuli.json",
+            'dataType': "json",
+            'success': function (data) {
+                json = data;
+            }
+        });
+        return json;
+    })();
+console.log(json)
 
 function sendData() {
     console.log('sending data to mturk');
@@ -96,6 +110,9 @@ function setupGame () {
     // number of trials to fetch from database is defined in ./app.js
     var socket = io.connect();
     socket.on('onConnected', function(d) {
+        // shuffle json data
+        var jsonShuffled = _.shuffle(json);
+
         // get workerId, etc. from URL (so that it can be sent to the server)
         var turkInfo = jsPsych.turk.turkInfo();
 
@@ -111,21 +128,12 @@ function setupGame () {
         };
 
         var main_on_start = function(trial) {
-            socket.removeListener('stimulus', oldCallback);
-            oldCallback = newCallback;
+            
+            
+            trial.image1_url = jsonShuffled[trial.trialNum].compressed_url;
+            trial.image2_url = jsonShuffled[trial.trialNum].orig_url;
+            trial.choices = _.range(1, 6);
 
-            if(trial.trialNum % catch_freq != 0) {
-                var newCallback = function (d) {
-		    console.log('orig_url',d.orig_url);
-                    trial.image1_url = d.orig_url;
-		    trial.image2_url = d.compressed_url;
-                    trial.choices = _.range(1, d.number_rating_levels + 1);
-                                    };
-                // call server for stims
-                socket.emit('getStim');
-                socket.on('stimulus', newCallback);
-
-            }
 
         };
 
