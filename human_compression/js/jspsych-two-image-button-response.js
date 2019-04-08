@@ -25,19 +25,19 @@ jsPsych.plugins["image-button-response"] = (function() {
                 default: undefined,
                 description: 'The category label.'
             },
-            image1_html: {
+            compressed_html: {
                 type: jsPsych.plugins.parameterType.IMAGE,
-                pretty_name: 'image1 HTML',
-                default: '<img src="%image1URL%" height="400" width="auto" id="image1_html">',
+                pretty_name: 'compressed HTML',
+                default: '<img src="%compressedURL%" height="400" width="auto" id="compressed_html">',
                 array: true,
-                description: 'The html of image1.'
+                description: 'The html of the compressed image.'
             },
-	    image2_html: {
+	    original_html: {
                 type: jsPsych.plugins.parameterType.IMAGE,
-                pretty_name: 'image2 HTML',
-                default: '<img src="%image2URL%" height="400" width="auto" id="image2_html">',
+                pretty_name: 'original HTML',
+                default: '<img src="%originalURL%" height="400" width="auto" id="original_html">',
                 array: true,
-                description: 'The html of the image2.'
+                description: 'The html of the original image.'
             },
             image_url: {
                 type: jsPsych.plugins.parameterType.STRING,
@@ -158,20 +158,18 @@ jsPsych.plugins["image-button-response"] = (function() {
 	    // Create large image container
             html += '<div id="img_container", class="mainDiv", align="center">';
             // place image 1 inside the image container (which has fixed location)
-            html += '<div id="img1_container", class="boxes">';
+            html += '<div id="img2_container", class="boxes">';
 
-            var img1_html_replaced = trial.image1_html.replace('%image1URL%', trial.image1_url);
-            console.log('img1_html_replaced' + img1_html_replaced);
-            html += img1_html_replaced;
+            var original_html_replaced = trial.original_html.replace('%originalURL%', trial.original_url);
+            console.log('original_html_replaced' + original_html_replaced);
+            html += original_html_replaced;
+	    // add second image container
+            html += '<div id="compressed_container", class="boxes">';
+
+            var compressed_html_replaced = trial.compressed_html.replace('%compressedURL%', trial.compressed_url);
+            html += compressed_html_replaced;
 
             html += '</div>';
-            
-	    // add second image container
-	    html += '<div id="img2_container", class="boxes">';
-
-            var img2_html_replaced = trial.image2_html.replace('%image2URL%', trial.image2_url);
-            console.log('img2_html_replaced' + img2_html_replaced);
-            html += img2_html_replaced;
 
             html += '</div>';
             html += '</div>';
@@ -254,14 +252,21 @@ jsPsych.plugins["image-button-response"] = (function() {
 	    
             // data saving
             var trial_data = {
-                dbname:'kiddraw',
-                colname: 'tracing_eval',
-                iterationName: 'pilot2',
+                dbname:'human_compression',
+                colname: 'bpg_hc_eval',
+                iterationName: 'testing',
                 reaction_time: response.rt,
-                image_url: trial.image_url,
+                compressed_url: trial.compressed_url,
+                original_url: trial.original_url,
+                compression_level: trial.compression_level,
+                compression_mode: trial.compression_mode,
+                filename: trial.filename,
+                image_height: trial.image_height,
+                image_name: trial.image_name,
+                choices: trial.choices,
                 session_id: trial.session_id,
-                task: trial.has_ref?'trace':'copy',
-                button_pressed: response.button,
+                game_id: trial.gameid,
+		button_pressed: response.button,
                 category: trial.category,
                 trialNum: trial.trialNum,
                 startTrialTime: start_time,
