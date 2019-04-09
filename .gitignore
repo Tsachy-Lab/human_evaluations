@@ -124,3 +124,5 @@ venv.bak/
 .html
 node_modules/
 
+# unknown
+*.#app.js

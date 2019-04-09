@@ -39,13 +39,6 @@ jsPsych.plugins["image-button-response"] = (function() {
                 array: true,
                 description: 'The html of the original image.'
             },
-            image_url: {
-                type: jsPsych.plugins.parameterType.STRING,
-                pretty_name: 'image urls',
-                default: undefined,
-                array: true,
-                description: 'The URL for the image cues.'
-            },
             session_id: {
                 type: jsPsych.plugins.parameterType.STRING,
                 pretty_name: 'session id',
@@ -134,12 +127,6 @@ jsPsych.plugins["image-button-response"] = (function() {
 
     plugin.trial = function(display_element, trial) {
 
-        // if(typeof trial.image_url === 'undefined'){
-        //     console.error('Required parameter "stimulus" missing in image-button-response');
-        // }
-
-        // wrapper function to show everything, call this when you've waited what you
-        // reckon is long enough for the data to come back from the db
         var start_time = 0;
         function show_display() {
 

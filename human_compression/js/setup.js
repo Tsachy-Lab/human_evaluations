@@ -94,14 +94,11 @@ function Trial () {
     this.type = 'image-button-response';
     this.iterationName = 'testing';
     this.dev_mode = false;
-    this.prompt = "Please rate your satisfaction with the image on the right, which is a reconstruction of the image on the left.";
-    this.image_url = "img/catch.png";
-    this.category ='catch';
+    this.prompt = "Please rate your satisfaction with the image on the right, which is a reconstruction of the image on the left. Please wait for both images to load before making your choice!";
     this.choices = ['1','2','3','4','5'];
     this.dev_mode = false,
     this.upper_bound = "EXCELLENT";
     this.lower_bound = "POOR";
-    this.age = 11;
     this.session_id = '22222222222';
 }
 
