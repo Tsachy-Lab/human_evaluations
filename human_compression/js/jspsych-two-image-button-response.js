@@ -28,14 +28,14 @@ jsPsych.plugins["image-button-response"] = (function() {
             compressed_html: {
                 type: jsPsych.plugins.parameterType.IMAGE,
                 pretty_name: 'compressed HTML',
-                default: '<img src="%compressedURL%" height="400" width="auto" id="compressed_html">',
+                default: '<img src="%compressedURL%" id="compressed_html">',
                 array: true,
                 description: 'The html of the compressed image.'
             },
 	    original_html: {
                 type: jsPsych.plugins.parameterType.IMAGE,
                 pretty_name: 'original HTML',
-                default: '<img src="%originalURL%" height="400" width="auto" id="original_html">',
+                default: '<img src="%originalURL%" width="auto" id="original_html">',
                 array: true,
                 description: 'The html of the original image.'
             },
@@ -156,22 +156,20 @@ jsPsych.plugins["image-button-response"] = (function() {
             }
 		
 	    // Create large image container
-            html += '<div id="img_container", class="mainDiv", align="center">';
-            // place image 1 inside the image container (which has fixed location)
-            html += '<div id="img2_container", class="boxes">';
-
+            html += '<div id="img_container", class="box", align="center">';
+            
+            // place original image inside the image container (which has fixed location)
+            html += '<div id="original_container", class="A">';
             var original_html_replaced = trial.original_html.replace('%originalURL%', trial.original_url);
             console.log('original_html_replaced' + original_html_replaced);
             html += original_html_replaced;
-	    // add second image container
-            html += '<div id="compressed_container", class="boxes">';
-
+	    html += '</div>';
+            // add compressed image into second image container
+            html += '<div id="compressed_container", class="B">';
             var compressed_html_replaced = trial.compressed_html.replace('%compressedURL%', trial.compressed_url);
             html += compressed_html_replaced;
-
             html += '</div>';
 
-            html += '</div>';
             html += '</div>';
 
             //display buttons
@@ -261,7 +259,7 @@ jsPsych.plugins["image-button-response"] = (function() {
                 compression_level: trial.compression_level,
                 compression_mode: trial.compression_mode,
                 filename: trial.filename,
-                image_height: trial.image_height,
+                resized_height: trial.resized_height,
                 image_name: trial.image_name,
                 choices: trial.choices,
                 session_id: trial.session_id,

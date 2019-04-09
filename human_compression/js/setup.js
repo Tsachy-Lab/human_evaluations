@@ -132,7 +132,7 @@ function setupGame () {
             trial.compression_level = jsonShuffled[trial.trialNum].compression_level;
 	    trial.compression_mode = jsonShuffled[trial.trialNum].compression_mode;
             trial.filename = jsonShuffled[trial.trialNum].filename;
-            trial.image_height = jsonShuffled[trial.trialNum].image_height;
+            trial.resized_height = jsonShuffled[trial.trialNum].resized_height;
             trial.image_name = jsonShuffled[trial.trialNum].image_name;
 	    trial.compressed_url = jsonShuffled[trial.trialNum].compressed_url;
             trial.original_url = jsonShuffled[trial.trialNum].original_url;
