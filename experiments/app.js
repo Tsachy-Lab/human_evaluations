@@ -154,44 +154,6 @@ catch (err) {
 };
 
 
-function sendSingleStim(socket) {
-    sendPostRequest('http://localhost:6003/db/getsinglestim', {
-        json: {
-            dbname: 'stimuli',
-            colname: 'bpg_hc_eval',
-            numTrials: 1
-           
-        }
-    }, (error, res, body) => {
-        if (!error && res.statusCode === 200) {
-	    console.log('stimulus',body);
-            socket.emit('stimulus', body);
-    } else {
-        console.log(`error getting stims: ${error} ${body}`);
-        console.log(`falling back to local stimList`);
-    }
-});
-}
-
-
-// function initializeWithTrials(socket, id) {
-//     sendPostRequest('http://localhost:6002/db/getstims', {
-//         json: {
-//             dbname: 'stimuli',
-//             colname: 'kiddraw_tracing_eval',
-//             numTrials: 1,
-//             gameid: id
-//         }
-//     }, (error, res, body) => {
-//         if (!error && res.statusCode === 200) {
-//         // send trial list (and id) to client
-//         socket.emit('onConnected', body);
-//     }else {
-//         console.log(`error getting stims: ${error} ${body}`);
-//     }
-// });
-// }
-
 function writeDataToMongo (data) {
     sendPostRequest(
         'http://localhost:6003/db/insert',

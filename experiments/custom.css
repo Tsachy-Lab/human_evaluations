@@ -11,14 +11,32 @@
  * fonts and type
  *
  */
-.mainDiv{
-	width:90%;
-	margin:auto;
-	}
-.boxes{
-	width:50%;
-	float:left;
-	}
+.box{
+
+    display: flex;
+    flex-flow: row nowrap ;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+}
+.box div.A {
+    order: 1
+    flex: 0 1 auto;
+    align-self: auto;
+    max-height: 600px;
+    max-width: 500px;
+    margin-right: 5px;
+}
+.box div.B {
+    order: 2
+    flex: 0 1 auto;  
+    align-self: auto;
+    max-height: 600px;
+    max-width: 500px;
+    margin-left: 5px;
+}
 
 
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700);

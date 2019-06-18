@@ -25,26 +25,19 @@ jsPsych.plugins["image-button-response"] = (function() {
                 default: undefined,
                 description: 'The category label.'
             },
-            image1_html: {
+            compressed_html: {
                 type: jsPsych.plugins.parameterType.IMAGE,
-                pretty_name: 'image1 HTML',
-                default: '<img src="%image1URL%" height="400" width="auto" id="image1_html">',
+                pretty_name: 'compressed HTML',
+                default: '<img src="%compressedURL%" id="compressed_html">',
                 array: true,
-                description: 'The html of image1.'
+                description: 'The html of the compressed image.'
             },
-	    image2_html: {
+	    original_html: {
                 type: jsPsych.plugins.parameterType.IMAGE,
-                pretty_name: 'image2 HTML',
-                default: '<img src="%image2URL%" height="400" width="auto" id="image2_html">',
+                pretty_name: 'original HTML',
+                default: '<img src="%originalURL%" width="auto" id="original_html">',
                 array: true,
-                description: 'The html of the image2.'
-            },
-            image_url: {
-                type: jsPsych.plugins.parameterType.STRING,
-                pretty_name: 'image urls',
-                default: undefined,
-                array: true,
-                description: 'The URL for the image cues.'
+                description: 'The html of the original image.'
             },
             session_id: {
                 type: jsPsych.plugins.parameterType.STRING,
@@ -134,12 +127,6 @@ jsPsych.plugins["image-button-response"] = (function() {
 
     plugin.trial = function(display_element, trial) {
 
-        // if(typeof trial.image_url === 'undefined'){
-        //     console.error('Required parameter "stimulus" missing in image-button-response');
-        // }
-
-        // wrapper function to show everything, call this when you've waited what you
-        // reckon is long enough for the data to come back from the db
         var start_time = 0;
         function show_display() {
 
@@ -156,24 +143,20 @@ jsPsych.plugins["image-button-response"] = (function() {
             }
 		
 	    // Create large image container
-            html += '<div id="img_container", class="mainDiv", align="center">';
-            // place image 1 inside the image container (which has fixed location)
-            html += '<div id="img1_container", class="boxes">';
-
-            var img1_html_replaced = trial.image1_html.replace('%image1URL%', trial.image1_url);
-            console.log('img1_html_replaced' + img1_html_replaced);
-            html += img1_html_replaced;
-
-            html += '</div>';
+            html += '<div id="img_container", class="box", align="center">';
             
-	    // add second image container
-	    html += '<div id="img2_container", class="boxes">';
-
-            var img2_html_replaced = trial.image2_html.replace('%image2URL%', trial.image2_url);
-            console.log('img2_html_replaced' + img2_html_replaced);
-            html += img2_html_replaced;
-
+            // place original image inside the image container (which has fixed location)
+            html += '<div id="original_container", class="A">';
+            var original_html_replaced = trial.original_html.replace('%originalURL%', trial.original_url);
+            console.log('original_html_replaced' + original_html_replaced);
+            html += original_html_replaced;
+	    html += '</div>';
+            // add compressed image into second image container
+            html += '<div id="compressed_container", class="B">';
+            var compressed_html_replaced = trial.compressed_html.replace('%compressedURL%', trial.compressed_url);
+            html += compressed_html_replaced;
             html += '</div>';
+
             html += '</div>';
 
             //display buttons
@@ -254,14 +237,21 @@ jsPsych.plugins["image-button-response"] = (function() {
 	    
             // data saving
             var trial_data = {
-                dbname:'bpg_hc_eval',
-                colname: 'tracing_eval',
-                iterationName: 'pilot2',
+                dbname:'human_compression',
+                colname: 'bpg_hc_eval',
+                iterationName: 'testing',                
                 reaction_time: response.rt,
-                image_url: trial.image_url,
+                compressed_url: trial.compressed_url,
+                original_url: trial.original_url,
+                compression_level: trial.compression_level,
+                compression_mode: trial.compression_mode,
+                filename: trial.filename,
+                resized_height: trial.resized_height,
+                image_name: trial.image_name,
+                choices: trial.choices,
                 session_id: trial.session_id,
-                task: trial.has_ref?'trace':'copy',
-                button_pressed: response.button,
+                game_id: trial.gameid,
+		button_pressed: response.button,
                 category: trial.category,
                 trialNum: trial.trialNum,
                 startTrialTime: start_time,

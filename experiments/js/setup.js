@@ -94,14 +94,11 @@ function Trial () {
     this.type = 'image-button-response';
     this.iterationName = 'testing';
     this.dev_mode = false;
-    this.prompt = "Please rate your satisfaction with the image on the right, which is a reconstruction of the image on the left.";
-    this.image_url = "img/catch.png";
-    this.category ='catch';
+    this.prompt = "Please rate your satisfaction with the image on the right, which is a reconstruction of the image on the left. Please wait for both images to load before making your choice!";
     this.choices = ['1','2','3','4','5'];
     this.dev_mode = false,
     this.upper_bound = "EXCELLENT";
     this.lower_bound = "POOR";
-    this.age = 11;
     this.session_id = '22222222222';
 }
 
@@ -127,11 +124,14 @@ function setupGame () {
             socket.emit('currentData', data);
         };
 
-        var main_on_start = function(trial) {
-                        
+        var main_on_start = function(trial) {            
             trial.compression_level = jsonShuffled[trial.trialNum].compression_level;
-            trial.image1_url = jsonShuffled[trial.trialNum].compressed_url;
-            trial.image2_url = jsonShuffled[trial.trialNum].orig_url;
+	    trial.compression_mode = jsonShuffled[trial.trialNum].compression_mode;
+            trial.filename = jsonShuffled[trial.trialNum].filename;
+            trial.resized_height = jsonShuffled[trial.trialNum].resized_height;
+            trial.image_name = jsonShuffled[trial.trialNum].image_name;
+	    trial.compressed_url = jsonShuffled[trial.trialNum].compressed_url;
+            trial.original_url = jsonShuffled[trial.trialNum].original_url;
             trial.choices = _.range(1, 6);
 
 
