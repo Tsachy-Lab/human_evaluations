@@ -25,12 +25,19 @@ jsPsych.plugins["image-button-response"] = (function() {
                 default: undefined,
                 description: 'The category label.'
             },
-            image_html: {
+            image1_html: {
                 type: jsPsych.plugins.parameterType.IMAGE,
-                pretty_name: 'image HTML',
-                default: '<img src="%imageURL%" height="400" width="400" id="image_html">',
+                pretty_name: 'image1 HTML',
+                default: '<img src="%image1URL%" height="400" width="auto" id="image1_html">',
                 array: true,
-                description: 'The html of the image cue used to prompt drawing. Can create own style.'
+                description: 'The html of image1.'
+            },
+	    image2_html: {
+                type: jsPsych.plugins.parameterType.IMAGE,
+                pretty_name: 'image2 HTML',
+                default: '<img src="%image2URL%" height="400" width="auto" id="image2_html">',
+                array: true,
+                description: 'The html of the image2.'
             },
             image_url: {
                 type: jsPsych.plugins.parameterType.STRING,
@@ -147,14 +154,26 @@ jsPsych.plugins["image-button-response"] = (function() {
             if (trial.message !== null) {
                 html += '<div class="msg-alert" id="message">' + trial.message.alert + '</div>';
             }
+		
+	    // Create large image container
+            html += '<div id="img_container", class="mainDiv", align="center">';
+            // place image 1 inside the image container (which has fixed location)
+            html += '<div id="img1_container", class="boxes">';
 
-            // place the target drawing inside the image container (which has fixed location)
-            html += '<div id="img_container">';
+            var img1_html_replaced = trial.image1_html.replace('%image1URL%', trial.image1_url);
+            console.log('img1_html_replaced' + img1_html_replaced);
+            html += img1_html_replaced;
 
-            var img_html_replaced = trial.image_html.replace('%imageURL%', trial.image_url);
-            console.log('img_html_replaced' + img_html_replaced);
-            html += img_html_replaced;
+            html += '</div>';
+            
+	    // add second image container
+	    html += '<div id="img2_container", class="boxes">';
 
+            var img2_html_replaced = trial.image2_html.replace('%image2URL%', trial.image2_url);
+            console.log('img2_html_replaced' + img2_html_replaced);
+            html += img2_html_replaced;
+
+            html += '</div>';
             html += '</div>';
 
             //display buttons
@@ -235,7 +254,7 @@ jsPsych.plugins["image-button-response"] = (function() {
 	    
             // data saving
             var trial_data = {
-                dbname:'kiddraw',
+                dbname:'bpg_hc_eval',
                 colname: 'tracing_eval',
                 iterationName: 'pilot2',
                 reaction_time: response.rt,

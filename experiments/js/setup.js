@@ -128,8 +128,8 @@ function setupGame () {
         };
 
         var main_on_start = function(trial) {
-            
-            
+                        
+            trial.compression_level = jsonShuffled[trial.trialNum].compression_level;
             trial.image1_url = jsonShuffled[trial.trialNum].compressed_url;
             trial.image2_url = jsonShuffled[trial.trialNum].orig_url;
             trial.choices = _.range(1, 6);
