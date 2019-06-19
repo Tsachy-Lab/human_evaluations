@@ -48,11 +48,16 @@ d.bootstrap %>%
   theme_few() +
   ylab('Image') +
   xlab('rating') +
-  scale_x_continuous(breaks = NULL) +
+  #scale_x_continuous(breaks = NULL) +
   theme(aspect.ratio = 1/2)
 
 ggsave('../../plots/mean_ratings.pdf')
 ```
+
+```{r}
+d.bootstrap
+```
+
 
 ## fit data with lmer 
 ```{r}
