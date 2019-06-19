@@ -16,7 +16,7 @@ library(tidyboot)
 
 ### load in ratings data 
 ```{r}
-d <- read_csv('../../results/human_compression_ratings.csv')
+d <- read_csv('../../results/human_compression_ratings_hashed.csv')
 ```
 
 ### number of times each worker rated an image
