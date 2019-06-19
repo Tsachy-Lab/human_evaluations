@@ -54,6 +54,7 @@ d.bootstrap %>%
 ggsave('../../plots/mean_ratings.pdf')
 ```
 
+## Show bootstrapped confidence intervals for mean ratings for human vs. webp, for each image
 ```{r}
 d.bootstrap
 ```
