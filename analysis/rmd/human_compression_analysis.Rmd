@@ -29,26 +29,26 @@ d %>%
 ### bootstrap mean rating
 ```{r}
 d.bootstrap <- d %>% 
-  group_by(Compressor, Image) %>% 
-  tidyboot_mean(column=Rating) 
+  group_by(compressor, image) %>% 
+  tidyboot_mean(column=rating) 
 ```
 
 ## plot mean rating by image x compressor, sorted by human vs. webp difference magnitude
 ```{r}
 d.bootstrap %>%
-  select(Compressor, Image, empirical_stat) %>%
-  spread(Compressor, empirical_stat) %>%
+  select(compressor, image, empirical_stat) %>%
+  spread(compressor, empirical_stat) %>%
   mutate(diff = human - webp) %>%
-  select(Image,diff) %>%
-  left_join(d.bootstrap, d.diff, by=c('Image')) %>%
-  ggplot(aes(x = empirical_stat, y =  fct_reorder(factor(Image), diff), 
-                         color = Compressor)) +
+  select(image,diff) %>%
+  left_join(d.bootstrap, d.diff, by=c('image')) %>%
+  ggplot(aes(x = empirical_stat, y =  fct_reorder(factor(image), diff), 
+                         color = compressor)) +
   geom_point() +
   geom_errorbarh(aes(xmax = ci_upper, xmin = ci_lower), height = 0) +
   theme_few() +
-  ylab('Image') +
+  ylab('image') +
   xlab('rating') +
-  #scale_x_continuous(breaks = NULL) +
+  scale_x_continuous('rating', seq(1,10,1),seq(1,10,1), limits=c(1,10)) +
   theme(aspect.ratio = 1/2)
 
 ggsave('../../plots/mean_ratings.pdf')
@@ -62,7 +62,7 @@ d.bootstrap
 
 ## fit data with lmer 
 ```{r}
-m <- lmer(Rating ~ Compressor + (1 + Compressor | Image) + (1 + Compressor | WorkerID), data = d)
+m <- lmer(rating ~ compressor + (1 + compressor | image) + (1 + compressor | WorkerID), data = d)
 summary(m)
 ```
 
